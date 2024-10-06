@@ -27,6 +27,14 @@ type Block struct {
 	Hash          []byte
 }
 
+/*
+Calculating hashes is a costly operation, making the addition of new
+blocks very difficult (what also makes there modification very
+difficult), but also making blockchains much more secure.
+
+For know, I'll simply concatenate the header fields to calculate the
+hash.
+*/
 func (b *Block) SetHash() {
 	timestamp := []byte(strconv.FormatInt(b.Timestamp, 10))
 	headers := bytes.Join([][]byte{b.PrevBlockHash, b.Data, timestamp}, []byte{})
