@@ -60,6 +60,10 @@ func (bc *Blockchain) AddBlock(data string) {
 	bc.blocks = append(bc.blocks, block)
 }
 
+/*
+The fisrt block in a blockchain is
+usually called the genesis block.
+*/
 func NewGenesisBlock() *Block {
 	return NewBlock("Genesis block", []byte{})
 }
