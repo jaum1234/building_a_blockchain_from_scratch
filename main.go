@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"crypto/sha256"
+	"fmt"
 	"strconv"
 	"time"
 )
@@ -61,17 +62,28 @@ func (bc *Blockchain) AddBlock(data string) {
 }
 
 /*
-The fisrt block in a blockchain is
+The firtt block in a blockchain is
 usually called the genesis block.
 */
 func NewGenesisBlock() *Block {
 	return NewBlock("Genesis block", []byte{})
 }
 
-func NewBlockChain() *Blockchain {
+func NewBlockchain() *Blockchain {
 	return &Blockchain{[]*Block{NewGenesisBlock()}}
 }
 
 func main() {
+	bc := NewBlockchain()
 
+	bc.AddBlock("I love my girlfriend.")
+	bc.AddBlock("I love dogs.")
+	bc.AddBlock("I love coffee.")
+
+	for _, block := range bc.blocks {
+		fmt.Printf("Prev. hash: %x\n", block.PrevBlockHash)
+		fmt.Printf("Data: %s\n", block.Data)
+		fmt.Printf("Hash: %x\n", block.Hash)
+		fmt.Println()
+	}
 }
