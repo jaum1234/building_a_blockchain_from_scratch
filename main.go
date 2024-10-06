@@ -43,7 +43,7 @@ func (b *Block) SetHash() {
 	b.Hash = hash[:]
 }
 
-func newBlock(data string, prevBlockHash []byte) *Block {
+func NewBlock(data string, prevBlockHash []byte) *Block {
 	block := &Block{time.Now().Unix(), []byte(data), prevBlockHash, []byte{}}
 	block.SetHash()
 
@@ -54,10 +54,18 @@ type Blockchain struct {
 	blocks []*Block
 }
 
-func (bc *Blockchain) addBlock(data string) {
+func (bc *Blockchain) AddBlock(data string) {
 	prevBlock := bc.blocks[len(bc.blocks)-1]
-	block := newBlock(data, prevBlock.Hash)
+	block := NewBlock(data, prevBlock.Hash)
 	bc.blocks = append(bc.blocks, block)
+}
+
+func NewGenesisBlock() *Block {
+	return NewBlock("Genesis block", []byte{})
+}
+
+func NewBlockChain() *Blockchain {
+	return &Blockchain{[]*Block{NewGenesisBlock()}}
 }
 
 func main() {
