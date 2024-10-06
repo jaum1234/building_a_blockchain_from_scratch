@@ -12,10 +12,18 @@ type Blockchain struct {
 	blocks []*Block
 }
 
+type BlockToBeAdded struct {
+	Data string `json:"data"`
+}
+
 func (bc *Blockchain) AddBlock(data string) {
 	prevBlock := bc.blocks[len(bc.blocks)-1]
 	block := NewBlock(data, prevBlock.Hash)
 	bc.blocks = append(bc.blocks, block)
+}
+
+func (bc *Blockchain) LastBlock() *Block {
+	return bc.blocks[len(bc.blocks)-1]
 }
 
 func NewBlockchain() *Blockchain {
