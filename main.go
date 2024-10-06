@@ -17,10 +17,11 @@ func main() {
 
 		for _, v := range bc.blocks {
 			blocks = append(blocks, map[string]any{
-				"Timestamp":     v.Timestamp,
-				"Data":          string(v.Data),
-				"Hash":          v.Hash,
-				"Previous Hash": v.PrevBlockHash,
+				"Timestamp":        v.Timestamp,
+				"Data":             string(v.Data),
+				"Hash":             v.Hash,
+				"Previous Hash":    v.PrevBlockHash,
+				"Number used Once": v.Nonce,
 			})
 		}
 
@@ -49,10 +50,11 @@ func main() {
 			"success": true,
 			"message": "Block inserted",
 			"data": map[string]any{
-				"Timestamp":     b.Timestamp,
-				"Data":          string(b.Data),
-				"Hash":          b.Hash,
-				"Previous Hash": b.PrevBlockHash,
+				"Timestamp":        b.Timestamp,
+				"Data":             string(b.Data),
+				"Hash":             b.Hash,
+				"Previous Hash":    b.PrevBlockHash,
+				"Number used Once": b.Nonce,
 			},
 		})
 	})
