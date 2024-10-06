@@ -1,8 +1,6 @@
 package main
 
 import (
-	"os"
-
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -59,5 +57,5 @@ func main() {
 		})
 	})
 
-	engine.Run(os.Getenv("APP_HOST") + ":" + os.Getenv("APP_PORT"))
+	engine.Run()
 }
