@@ -9,6 +9,14 @@ import (
 )
 
 /*
+In its essence, blockchain is just a public distributed
+database of records.
+
+A new block can only be added after the consent of
+other keepers of the database.
+*/
+
+/*
 A block is a data structure data will contain valuable
 information.
 
@@ -62,7 +70,7 @@ func (bc *Blockchain) AddBlock(data string) {
 }
 
 /*
-The firtt block in a blockchain is
+The first block in a blockchain is
 usually called the genesis block.
 */
 func NewGenesisBlock() *Block {
