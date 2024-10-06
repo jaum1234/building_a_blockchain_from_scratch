@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/hex"
+
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -19,8 +21,8 @@ func main() {
 			blocks = append(blocks, map[string]any{
 				"Timestamp":        v.Timestamp,
 				"Data":             string(v.Data),
-				"Hash":             v.Hash,
-				"Previous Hash":    v.PrevBlockHash,
+				"Hash":             hex.EncodeToString(v.Hash),
+				"Previous Hash":    hex.EncodeToString(v.PrevBlockHash),
 				"Number used Once": v.Nonce,
 			})
 		}
@@ -52,8 +54,8 @@ func main() {
 			"data": map[string]any{
 				"Timestamp":        b.Timestamp,
 				"Data":             string(b.Data),
-				"Hash":             b.Hash,
-				"Previous Hash":    b.PrevBlockHash,
+				"Hash":             hex.EncodeToString(b.Hash),
+				"Previous Hash":    hex.EncodeToString(b.PrevBlockHash),
 				"Number used Once": b.Nonce,
 			},
 		})

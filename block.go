@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/sha256"
 	"encoding/binary"
+	"encoding/hex"
 	"strconv"
 	"strings"
 	"time"
@@ -48,9 +49,10 @@ func (b *Block) ComputeHash(difficulty string) {
 
 		headers := bytes.Join([][]byte{b.PrevBlockHash, b.Data, timestamp, buf.Bytes()}, []byte{})
 		hash := sha256.Sum256(headers)
+
 		slice := hash[:]
 
-		if strings.HasPrefix(string(slice), difficulty) {
+		if strings.HasPrefix(hex.EncodeToString(slice), difficulty) {
 			b.Hash = slice
 			b.Nonce = nonce
 			break
