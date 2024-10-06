@@ -50,6 +50,16 @@ func newBlock(data string, prevBlockHash []byte) *Block {
 	return block
 }
 
+type Blockchain struct {
+	blocks []*Block
+}
+
+func (bc *Blockchain) addBlock(data string) {
+	prevBlock := bc.blocks[len(bc.blocks)-1]
+	block := newBlock(data, prevBlock.Hash)
+	bc.blocks = append(bc.blocks, block)
+}
+
 func main() {
 
 }
