@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/hex"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -10,9 +11,11 @@ import (
 func main() {
 	godotenv.Load()
 
-	bc := NewBlockchain()
-
 	engine := gin.Default()
+
+	fmt.Println("Generating genesis block...")
+	bc := NewBlockchain()
+	fmt.Println("Genesis block generated.")
 
 	engine.GET("/blocks", func(c *gin.Context) {
 		blocks := make([]map[string]any, 0)
@@ -61,5 +64,22 @@ func main() {
 		})
 	})
 
+	engine.GET("/is-broken", func(c *gin.Context) {
+		result := bc.IsBroken()
+		var message string
+
+		if !result {
+			message = "OMG! The blockchain has been broken."
+		} else {
+			message = "The blockchain is fine."
+		}
+
+		c.JSON(200, gin.H{
+			"success": true,
+			"message": message,
+		})
+	})
+
 	engine.Run()
+
 }
